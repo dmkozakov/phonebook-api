@@ -17,9 +17,6 @@ const login = async (req, res) => {
     if (!isMatch) {
         throw helpers_1.HttpError.set(401, 'Email or password invalid');
     }
-    if (!user.verify) {
-        throw helpers_1.HttpError.set(401, 'Please verify your email');
-    }
     const result = await services_1.AuthService.login(user._id);
     const token = result === null || result === void 0 ? void 0 : result.accessToken;
     res.cookie('refreshToken', result === null || result === void 0 ? void 0 : result.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
@@ -30,6 +27,7 @@ const login = async (req, res) => {
         code: 200,
         data: {
             user: {
+                name: result.name,
                 email: result.email,
                 subscription: result.subscription,
             },

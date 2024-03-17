@@ -17,11 +17,12 @@ const TokenService_1 = __importDefault(require("./TokenService"));
 const dtos_1 = require("../dtos");
 class AuthService {
     async register(req) {
-        const { email, password, subscription } = req.body;
+        const { name, email, password, subscription } = req.body;
         const avatarURL = gravatar_1.default.url(email);
         const verificationToken = node_crypto_1.default.randomUUID();
         const hashedPassword = await bcrypt_1.default.hash(password, 10);
         const newUser = await models_1.User.create({
+            name,
             email,
             password: hashedPassword,
             subscription,

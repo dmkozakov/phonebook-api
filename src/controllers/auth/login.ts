@@ -20,9 +20,9 @@ const login = async (req: Request, res: Response) => {
     throw HttpError.set(401, 'Email or password invalid');
   }
 
-  if (!user.verify) {
-    throw HttpError.set(401, 'Please verify your email');
-  }
+  // if (!user.verify) {
+  //   throw HttpError.set(401, 'Please verify your email');
+  // }
 
   const result = await AuthService.login(user._id);
 
