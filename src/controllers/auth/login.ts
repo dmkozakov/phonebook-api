@@ -37,6 +37,7 @@ const login = async (req: Request, res: Response) => {
     code: 200,
     data: {
       user: {
+        name: result.name,
         email: result.email,
         subscription: result.subscription,
       },

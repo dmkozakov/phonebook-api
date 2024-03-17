@@ -5,8 +5,8 @@ import { AuthService } from '../../services';
 import type { Request, Response } from 'express';
 
 const register = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { name, email, password } = req.body;
+  if (!email || !password || !name) {
     throw HttpError.set(400, 'Missing required fields');
   }
 
@@ -26,6 +26,7 @@ const register = async (req: Request, res: Response) => {
     code: 201,
     data: {
       user: {
+        name: newUser.name,
         email: newUser.email,
         subscription: newUser.subscription,
         avatarURL: newUser.avatarURL,

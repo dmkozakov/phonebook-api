@@ -21,13 +21,14 @@ type FileRequest = Request & { file: { path: string; originalname: string } };
 
 class AuthService {
   async register(req: Request) {
-    const { email, password, subscription } = req.body;
+    const {name, email, password, subscription } = req.body;
     const avatarURL = gravatar.url(email);
 
     const verificationToken = crypto.randomUUID();
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
+      name,
       email,
       password: hashedPassword,
       subscription,
